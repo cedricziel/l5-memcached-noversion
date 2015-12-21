@@ -1,6 +1,7 @@
 {
     "name": "cedricziel/l5-memcached-noversion",
     "description": "Removes the getVersion call from the Stock Laravel MemcachedConnector",
+    "keywords": ["google", "appengine", "gae", "laravel", "lumen", "memcached"],
     "type": "library",
     "require": {
         "illuminate/cache": "~5.1"
