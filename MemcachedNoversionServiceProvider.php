@@ -2,6 +2,9 @@
 
 namespace CedricZiel\MemcachedNoVersion;
 
+use Illuminate\Cache\MemcachedStore;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class MemcachedNoversionServiceProvider extends ServiceProvider
@@ -13,7 +16,13 @@ class MemcachedNoversionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Cache::extend('memcached', function($app) {
+            $servers = Config::get('cache.stores.memcached.servers');
+            $prefix = Config::get('cache.prefix');
+
+            $connector = new MemcachedConnector;
+            return Cache::repository(new MemcachedStore($connector->connect($servers), $prefix));
+        });
     }
 
     /**
@@ -23,15 +32,6 @@ class MemcachedNoversionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('memcached.connector', function () {
-            return new MemcachedConnector;
-        });
-    }
-
-    public function provides()
-    {
-        return [
-            'memcached.connector'
-        ];
+        //
     }
 }

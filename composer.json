@@ -4,7 +4,8 @@
     "keywords": ["google", "appengine", "gae", "laravel", "lumen", "memcached"],
     "type": "library",
     "require": {
-        "illuminate/cache": "~5.1"
+        "illuminate/cache": "~5.1",
+        "illuminate/support": "^5.1"
     },
     "license": "MIT",
     "authors": [
