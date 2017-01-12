@@ -3,7 +3,7 @@
 namespace CedricZiel\MemcachedNoVersion;
 
 use Illuminate\Cache\MemcachedConnector as FrameworkMemcachedConnector;
-use Memcached;
+use Memcache;
 use RuntimeException;
 
 /**
@@ -26,7 +26,7 @@ class MemcachedConnector extends FrameworkMemcachedConnector
         array $servers, $connectionId = null,
         array $options = [], array $credentials = []
     ) {
-        $memcached = new Memcached;
+        $memcached = new Memcache;
         
         $memcached->set('l5-noversion', 1);
         if ($memcached->get('l5-noversion') !== 1) {
