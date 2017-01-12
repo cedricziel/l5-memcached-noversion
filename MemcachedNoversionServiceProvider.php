@@ -24,14 +24,4 @@ class MemcachedNoversionServiceProvider extends ServiceProvider
             return Cache::repository(new MemcachedStore($connector->connect($servers), $prefix));
         });
     }
-
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
 }
