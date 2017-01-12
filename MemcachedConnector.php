@@ -22,10 +22,11 @@ class MemcachedConnector extends FrameworkMemcachedConnector
      *
      * @throws \RuntimeException
      */
-    public function connect(array $servers)
-    {
-        $memcached = $this->getMemcached();
-
+    public function connect(
+        array $servers, $connectionId = null,
+        array $options = [], array $credentials = []
+    ) {
+        $memcached = new Memcached;
         // For each server in the array, we'll just extract the configuration and add
         // the server to the Memcached connection. Once we have added all of these
         // servers we'll verify the connection is successful and return it back.
@@ -34,7 +35,7 @@ class MemcachedConnector extends FrameworkMemcachedConnector
                 $server['host'], $server['port'], $server['weight']
             );
         }
-
+        
         $memcached->set('l5-noversion', 1);
         if ($memcached->get('l5-noversion') !== 1) {
             throw new RuntimeException('Could not establish Memcached connection.');
