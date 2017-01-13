@@ -25,10 +25,10 @@ class MemcachedNoversionServiceProvider extends ServiceProvider
                 $options = Config::get('cache.stores.memcached.options');
                 $prefix = Config::get('cache.prefix');
 
-                $connector = new MemcachedConnector;
+                $connector = new Memcached;
 
                 return Cache::repository(
-                    new MemcachedStore($connector->connect($servers, $connectionId, $options, $credentials), $prefix)
+                    new MemcachedStore($connector, $prefix)
                 );
             }
         );
