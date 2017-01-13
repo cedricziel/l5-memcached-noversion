@@ -2,6 +2,7 @@
 
 namespace CedricZiel\MemcachedNoVersion;
 
+use Memcached;
 use Illuminate\Cache\MemcachedStore;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
@@ -20,8 +21,10 @@ class MemcachedNoversionServiceProvider extends ServiceProvider
             'memcached',
             function ($app) {
 
+                $connect = new Memcached;
+
                 return Cache::repository(
-                    new MemcachedStore()
+                    new MemcachedStore($connect)
                 );
 
             }
