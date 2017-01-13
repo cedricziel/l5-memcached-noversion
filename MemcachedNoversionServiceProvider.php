@@ -19,17 +19,11 @@ class MemcachedNoversionServiceProvider extends ServiceProvider
         Cache::extend(
             'memcached',
             function ($app) {
-                $servers = Config::get('cache.stores.memcached.servers');
-                $connectionId = Config::get('cache.stores.memcached.persistent_id');
-                $credentials = Config::get('cache.stores.memcached.sasl');
-                $options = Config::get('cache.stores.memcached.options');
-                $prefix = Config::get('cache.prefix');
-
-                $connector = new Memcached;
 
                 return Cache::repository(
-                    new MemcachedStore($connector, $prefix)
+                    new MemcachedStore()
                 );
+
             }
         );
     }
